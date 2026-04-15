@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Stkly Patient | Dashboard</title>
+    <style>
+      :root {
+        --stkly-navy-dark: #062b4a;
+        --stkly-navy-light: #0d3558;
+        --stkly-green-primary: #19b56f;
+        --stkly-green-light: #2ed189;
+        --stkly-bg-soft: #f5f7f9;
+        --stkly-white: #ffffff;
+        --stkly-text-dark: #0a2239;
+        --stkly-text-light: #6b7c93;
+        --stkly-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        --sidebar-width: 240px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family:
+          "Segoe UI",
+          system-ui,
+          -apple-system,
+          sans-serif;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      body {
+        background-color: var(--stkly-bg-soft);
+        color: var(--stkly-text-dark);
+        overflow-x: hidden;
+        width: 100%;
+      }
+
+      /* Layout Container */
+      .stklypatient-wrapper {
+        display: flex;
+        min-height: 100vh;
+        width: 100%;
+      }
+
+      /* Sidebar */
+      .stklypatient-sidebar {
+        width: var(--sidebar-width);
+        background: var(--stkly-navy-dark);
+        color: white;
+        position: fixed;
+        height: 100vh;
+        z-index: 1000;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .stklypatient-sidebar-header {
+        padding: 30px 20px;
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .stklypatient-sidebar-header h2 {
+        font-size: 1.3rem;
+        letter-spacing: 1px;
+        font-weight: 600;
+      }
+
+      .stklypatient-nav {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding: 0 10px;
+      }
+
+      .stklypatient-nav-item {
+        padding: 14px 15px; /* Slightly larger for touch */
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        font-size: 0.95rem;
+      }
+
+      .stklypatient-nav-item:hover {
+        background: rgba(46, 209, 137, 0.1);
+        color: var(--stkly-green-light);
+      }
+
+      .stklypatient-nav-item.active {
+        background: var(--stkly-green-primary);
+        color: white;
+        box-shadow: 0 4px 10px rgba(25, 181, 111, 0.3);
+      }
+
+      /* Main Area */
+      .stklypatient-main {
+        flex-grow: 1;
+        margin-left: var(--sidebar-width);
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        width: 100%;
+      }
+
+      /* Top Bar */
+      .stklypatient-topbar {
+        height: 70px;
+        background: var(--stkly-white);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 24px;
+        box-shadow: var(--stkly-shadow);
+        position: sticky;
+        top: 0;
+        z-index: 900;
+      }
+
+      .stklypatient-greeting h1 {
+        font-size: 1.15rem;
+        color: var(--stkly-navy-dark);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 200px;
+      }
+
+      .stklypatient-user-info {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .stklypatient-email-display {
+        font-size: 0.85rem;
+        color: var(--stkly-text-light);
+      }
+
+      .stklypatient-btn-logout {
+        padding: 8px 14px;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 6px;
+        background: transparent;
+        color: var(--stkly-text-dark);
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-size: 0.85rem;
+      }
+
+      .stklypatient-btn-logout:hover {
+        border-color: #c53030;
+        color: #c53030;
+        background: #fff5f5;
+      }
+
+      /* Content Area */
+      .stklypatient-content {
+        padding: 24px;
+        max-width: 1100px;
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      /* Card System */
+      .stklypatient-card {
+        background: var(--stkly-white);
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: var(--stkly-shadow);
+        margin-bottom: 20px;
+        border: 1px solid rgba(0, 0, 0, 0.02);
+        width: 100%;
+      }
+
+      .stklypatient-card-title {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--stkly-navy-dark);
+        margin-bottom: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      /* UI Elements */
+      .stklypatient-btn-primary {
+        background: var(--stkly-green-primary);
+        color: white;
+        padding: 12px 20px;
+        border-radius: 8px;
+        border: none;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+        width: 100%; /* Default to full width for mobile */
+        text-align: center;
+      }
+
+      .stklypatient-btn-primary:hover {
+        background: #159b5e;
+      }
+
+      .stklypatient-badge {
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .badge-normal {
+        background: #e6fffa;
+        color: #236c6e;
+      }
+      .badge-pending {
+        background: #fffaf0;
+        color: #8e3a1d;
+      }
+
+      /* Grid Layouts */
+      .stklypatient-grid {
+        display: grid;
+        grid-template-columns: 1fr; /* Stack by default */
+        gap: 16px;
+      }
+
+      /* Table Responsiveness */
+      .stklypatient-table-container {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      /* Form Styling */
+      .stklypatient-input-group {
+        margin-bottom: 15px;
+      }
+
+      .stklypatient-input-group label {
+        display: block;
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-bottom: 6px;
+        color: var(--stkly-text-light);
+      }
+
+      .stklypatient-input {
+        width: 100%;
+        padding: 12px;
+        border: 1.5px solid #edf2f7;
+        border-radius: 8px;
+        outline: none;
+        font-size: 1rem;
+        appearance: none;
+      }
+
+      /* Mobile Controls */
+      .stklypatient-hamburger {
+        display: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 8px;
+        margin-right: 12px;
+        color: var(--stkly-navy-dark);
+      }
+
+      .stklypatient-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(2px);
+        z-index: 999;
+      }
+
+      /* Responsive Breakpoints */
+      @media (min-width: 768px) {
+        .stklypatient-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .stklypatient-btn-primary {
+          width: auto;
+        }
+      }
+
+      @media (max-width: 850px) {
+        .stklypatient-sidebar {
+          transform: translateX(-100%);
+          width: 260px;
+        }
+        .stklypatient-sidebar.mobile-active {
+          transform: translateX(0);
+        }
+        .stklypatient-main {
+          margin-left: 0;
+        }
+        .stklypatient-hamburger {
+          display: block;
+        }
+        .stklypatient-topbar {
+          padding: 0 16px;
+        }
+        .stklypatient-email-display {
+          display: none;
+        }
+        .stklypatient-overlay.active {
+          display: block;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .stklypatient-content {
+          padding: 16px;
+        }
+        .stklypatient-greeting h1 {
+          font-size: 1rem;
+          max-width: 140px;
+        }
+        .stklypatient-card {
+          padding: 16px;
+        }
+        h2 {
+          font-size: 1.25rem !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stklypatient-overlay" id="overlay"></div>
+
+    <div class="stklypatient-wrapper">
+      <!-- Sidebar -->
+      <aside class="stklypatient-sidebar" id="sidebar">
+        <div class="stklypatient-sidebar-header">
+          <h2>Stkly Patient</h2>
+        </div>
+        <nav class="stklypatient-nav">
+          <div
+            class="stklypatient-nav-item active"
+            onclick="loadSection('results', this)"
+          >
+            <span>📊</span> My Results
+          </div>
+          <div
+            class="stklypatient-nav-item"
+            onclick="loadSection('telemedicine', this)"
+          >
+            <span>🩺</span> Telemedicine
+          </div>
+          <div
+            class="stklypatient-nav-item"
+            onclick="loadSection('trials', this)"
+          >
+            <span>🔬</span> Clinical Trials
+          </div>
+          <div
+            class="stklypatient-nav-item"
+            onclick="loadSection('billing', this)"
+          >
+            <span>💳</span> Billing
+          </div>
+          <div
+            class="stklypatient-nav-item"
+            onclick="loadSection('settings', this)"
+          >
+            <span>⚙️</span> Settings
+          </div>
+        </nav>
+      </aside>
+
+      <!-- Main Content Area -->
+      <main class="stklypatient-main">
+        <header class="stklypatient-topbar">
+          <div style="display: flex; align-items: center; min-width: 0">
+            <button
+              class="stklypatient-hamburger"
+              id="hamburger"
+              aria-label="Menu"
+            >
+              <svg
+                width="24"
+                height="24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+              </svg>
+            </button>
+            <div class="stklypatient-greeting">
+              <h1 id="user-greeting">Hello, Patient 👋</h1>
+            </div>
+          </div>
+          <div class="stklypatient-user-info">
+            <span class="stklypatient-email-display" id="user-email"
+              >email@example.com</span
+            >
+            <button
+              class="stklypatient-btn-logout"
+              id="logout-btn"
+              onclick="window.location.href = './index.html'"
+            >
+              Logout
+            </button>
+          </div>
+        </header>
+
+        <div id="content-area" class="stklypatient-content">
+          <!-- Content injected here -->
+        </div>
+      </main>
+    </div>
+
+    <script>
+      /**
+       * INITIALIZATION & AUTHENTICATION
+       */
+      const userDataString = localStorage.getItem("user");
+      let currentUser = null;
+
+      if (!userDataString) {
+        const loginUrl = "./login.html";
+        if (loginUrl) window.location.href = loginUrl;
+      } else {
+        try {
+          currentUser = JSON.parse(userDataString);
+        } catch (e) {
+          console.error("Failed to parse user data", e);
+          window.location.href = "./login.html";
+        }
+      }
+
+      // DOM Elements
+      const contentArea = document.getElementById("content-area");
+      const greetingText = document.getElementById("user-greeting");
+      const emailText = document.getElementById("user-email");
+      const sidebar = document.getElementById("sidebar");
+      const overlay = document.getElementById("overlay");
+      const hamburger = document.getElementById("hamburger");
+      // const logoutBtn = document.getElementById("logout-btn");
+
+      /**
+       * SECTION TEMPLATES
+       */
+      const sectionContent = {
+        results: `
+                <h2 style="margin-bottom: 20px; font-size: 1.5rem;">My Laboratory Results</h2>
+                <div class="stklypatient-grid">
+                    <div class="stklypatient-card">
+                        <div class="stklypatient-card-title">
+                            Complete Blood Count
+                            <span class="stklypatient-badge badge-normal">Normal</span>
+                        </div>
+                        <p style="color: var(--stkly-text-light); font-size: 0.85rem; margin-bottom: 12px;">Date: Oct 12, 2023</p>
+                        <p style="font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px;">All parameters including RBC, WBC, and Hemoglobin levels are within standard range.</p>
+                        <button class="stklypatient-btn-primary"  onclick="window.location.href='./404.html'">Download PDF</button>
+                    </div>
+                    <div class="stklypatient-card">
+                        <div class="stklypatient-card-title">
+                            Lipid Profile
+                            <span class="stklypatient-badge badge-normal">Normal</span>
+                        </div>
+                        <p style="color: var(--stkly-text-light); font-size: 0.85rem; margin-bottom: 12px;">Date: Sep 28, 2023</p>
+                        <p style="font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px;">Cholesterol levels are optimal. Continue current diet and exercise regimen.</p>
+                        <button class="stklypatient-btn-primary"  onclick="window.location.href='./404.html'">Download PDF</button>
+                    </div>
+                </div>
+            `,
+        telemedicine: `
+                <h2 style="margin-bottom: 20px; font-size: 1.5rem;">Telemedicine Center</h2>
+                <div class="stklypatient-card">
+                    <div class="stklypatient-card-title">Book a New Consultation</div>
+                    <div style="display: flex; gap: 12px; overflow-x: auto; padding-bottom: 10px; -webkit-overflow-scrolling: touch;">
+                        <div style="min-width: 130px; text-align: center; background: #f8fafc; padding: 15px; border-radius: 12px; border: 1px solid #edf2f7;">
+                            <div style="font-size: 1.8rem; margin-bottom: 8px;">👨‍⚕️</div>
+                            <p style="font-weight: 700; font-size: 0.85rem;">Dr. Smith</p>
+                            <p style="font-size: 0.75rem; color: var(--stkly-text-light);">General Physician</p>
+                        </div>
+                        <div style="min-width: 130px; text-align: center; background: #f8fafc; padding: 15px; border-radius: 12px; border: 1px solid #edf2f7;">
+                            <div style="font-size: 1.8rem; margin-bottom: 8px;">👩‍⚕️</div>
+                            <p style="font-weight: 700; font-size: 0.85rem;">Dr. Miller</p>
+                            <p style="font-size: 0.75rem; color: var(--stkly-text-light);">Dermatologist</p>
+                        </div>
+                    </div>
+                    <button class="stklypatient-btn-primary" style="margin-top: 15px;"  onclick="window.location.href='./404.html'">Schedule Appointment</button>
+                </div>
+                <h3 style="margin: 25px 0 15px; font-size: 1.1rem;">Upcoming Appointments</h3>
+                <div class="stklypatient-card" style="border-left: 4px solid var(--stkly-green-primary);">
+                    <div style="display: flex; flex-direction: column; gap: 15px;">
+                        <div>
+                            <p style="font-weight: 700; font-size: 0.95rem;">Follow-up: Video Call</p>
+                            <p style="font-size: 0.85rem; color: var(--stkly-text-light); margin-top: 4px;">Dr. Alexander Pierce • Oct 25, 2023 at 10:00 AM</p>
+                        </div>
+                        <button class="stklypatient-btn-primary"  onclick="window.location.href='./404.html'">Join Call</button>
+                    </div>
+                </div>
+            `,
+        trials: `
+                <h2 style="margin-bottom: 20px; font-size: 1.5rem;">Clinical Trials</h2>
+                <div class="stklypatient-card">
+                    <div class="stklypatient-card-title">Available Trials for You</div>
+                    <div style="border-bottom: 1px solid #edf2f7; padding: 15px 0;">
+                        <p style="font-weight: 700; font-size: 0.95rem;">Diabetes Prevention Study (Type 2)</p>
+                        <p style="font-size: 0.85rem; color: var(--stkly-text-light); margin: 6px 0 12px;">Eligibility: Adults 18-65 with family history.</p>
+                        <button class="stklypatient-btn-primary" style="font-size: 0.85rem; padding: 8px 16px;"  onclick="window.location.href='./404.html'">Apply to Join</button>
+                    </div>
+                    <div style="padding: 15px 0;">
+                        <p style="font-weight: 700; font-size: 0.95rem;">Sleep Pattern Analysis</p>
+                        <p style="font-size: 0.85rem; color: var(--stkly-text-light); margin: 6px 0 12px;">Eligibility: Individuals experiencing mild insomnia.</p>
+                        <button class="stklypatient-btn-primary" style="font-size: 0.85rem; padding: 8px 16px;"  onclick="window.location.href='./404.html'">Apply to Join</button>
+                    </div>
+                </div>
+            `,
+        billing: `
+                <h2 style="margin-bottom: 20px; font-size: 1.5rem;">Billing & Payments</h2>
+                <div class="stklypatient-card" style="padding: 0;">
+                    <div class="stklypatient-table-container">
+                        <table style="width: 100%; border-collapse: collapse; min-width: 400px;">
+                            <thead>
+                                <tr style="text-align: left; background: #f8fafc;">
+                                    <th style="padding: 16px 20px; font-size: 0.8rem; color: var(--stkly-text-light); text-transform: uppercase;">Service</th>
+                                    <th style="padding: 16px 20px; font-size: 0.8rem; color: var(--stkly-text-light); text-transform: uppercase;">Amount</th>
+                                    <th style="padding: 16px 20px; font-size: 0.8rem; color: var(--stkly-text-light); text-transform: uppercase;">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid #f1f5f9;">
+                                    <td style="padding: 16px 20px; font-size: 0.9rem;">Telehealth Visit</td>
+                                    <td style="padding: 16px 20px; font-weight: 600;">$45.00</td>
+                                    <td style="padding: 16px 20px;"><span class="stklypatient-badge badge-normal">Paid</span></td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #f1f5f9;">
+                                    <td style="padding: 16px 20px; font-size: 0.9rem;">Lab Processing</td>
+                                    <td style="padding: 16px 20px; font-weight: 600;">$12.50</td>
+                                    <td style="padding: 16px 20px;"><span class="stklypatient-badge badge-normal">Paid</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `,
+        settings: `
+                <h2 style="margin-bottom: 20px; font-size: 1.5rem;">Profile Settings</h2>
+                <div class="stklypatient-card">
+                    <div class="stklypatient-input-group">
+                        <label>Full Name</label>
+                        <input type="text" class="stklypatient-input" id="profile-name" value="${currentUser ? currentUser.name : ""}">
+                    </div>
+                    <div class="stklypatient-input-group">
+                        <label>Email Address</label>
+                        <input type="email" class="stklypatient-input" value="${currentUser ? currentUser.email : ""}" readonly style="background: #f8fafc; color: var(--stkly-text-light);">
+                    </div>
+                    <div class="stklypatient-input-group">
+                        <label>Phone Number</label>
+                        <input type="number" class="stklypatient-input" placeholder="+1 (555) 000-0000" required>
+                    </div>
+                    <button class="stklypatient-btn-primary"  onclick="window.location.href='./404.html'">Save Profile</button>
+                </div>
+            `,
+      };
+
+      /**
+       * INTERACTIVE LOGIC
+       */
+      function loadSection(section, element) {
+        if (element) {
+          document
+            .querySelectorAll(".stklypatient-nav-item")
+            .forEach((item) => {
+              item.classList.remove("active");
+            });
+          element.classList.add("active");
+        }
+
+        contentArea.style.opacity = "0";
+        contentArea.style.transform = "translateY(10px)";
+
+        setTimeout(() => {
+          contentArea.innerHTML =
+            sectionContent[section] || "Section not found.";
+          contentArea.style.transition = "all 0.3s ease";
+          contentArea.style.opacity = "1";
+          contentArea.style.transform = "translateY(0)";
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }, 150);
+
+        // Close mobile menu
+        sidebar.classList.remove("mobile-active");
+        overlay.classList.remove("active");
+        document.body.style.overflow = "";
+      }
+
+      function init() {
+        if (currentUser) {
+          greetingText.innerText = `Hello, ${currentUser.name.split(" ")[0]} 👋`;
+          emailText.innerText = currentUser.email;
+          loadSection("results");
+        }
+
+        // Mobile toggle events
+        hamburger.addEventListener("click", () => {
+          sidebar.classList.add("mobile-active");
+          overlay.classList.add("active");
+          document.body.style.overflow = "hidden";
+        });
+
+        overlay.addEventListener("click", () => {
+          sidebar.classList.remove("mobile-active");
+          overlay.classList.remove("active");
+          document.body.style.overflow = "";
+        });
+
+        // Logout event
+        logoutBtn.addEventListener("click", () => {
+          localStorage.removeItem("user");
+          window.location.href = "./login.html";
+        });
+      }
+
+      // Run setup
+      init();
+    </script>
+  </body>
+</html>

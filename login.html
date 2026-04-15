@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oxyy - Login</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family:
+          "Inter",
+          -apple-system,
+          sans-serif;
+      }
+
+      :root {
+        --navy-dark: #062b4a;
+        --navy-deep: #071f3a;
+        --green-primary: #19b56f;
+        --text-dark: #0a2239;
+        --text-light: #6b7c93;
+        --bg-white: #ffffff;
+        --border-light: #e4e9f0;
+      }
+
+      .stklylogin-wrapper {
+        display: flex;
+        min-height: 100vh;
+        width: 100%;
+      }
+
+      .stklylogin-image-panel {
+        width: 50%;
+        background-image:
+          linear-gradient(rgba(6, 43, 74, 0.6), rgba(6, 43, 74, 0.6)),
+          url("./assets/b1.webp");
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: white;
+        padding: 40px;
+      }
+
+      .stklylogin-logo {
+        font-size: 42px;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+      .stklylogin-subtitle {
+        font-size: 18px;
+        margin-bottom: 30px;
+        opacity: 0.9;
+      }
+      .stklylogin-heading {
+        font-size: 32px;
+        font-weight: 600;
+        max-width: 450px;
+        line-height: 1.3;
+        margin-bottom: 40px;
+      }
+
+      .stklylogin-form-panel {
+        width: 50%;
+        background-color: var(--bg-white);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 60px 40px;
+      }
+
+      .stklylogin-form-container {
+        width: 100%;
+        max-width: 500px;
+      }
+
+      .stklylogin-header {
+        text-align: center;
+        margin-bottom: 32px;
+      }
+      .stklylogin-header h1 {
+        font-size: 28px;
+        color: var(--text-dark);
+        margin-bottom: 8px;
+      }
+
+      .stklylogin-form-group {
+        margin-bottom: 18px;
+      }
+      .stklylogin-label {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+
+      .stklylogin-input,
+      .stklylogin-select {
+        width: 100%;
+        padding: 14px 16px;
+        border: 1px solid var(--border-light);
+        border-radius: 4px;
+        font-size: 14px;
+        outline: none;
+        background-color: #fcfdfe;
+      }
+
+      .stklylogin-input:focus,
+      .stklylogin-select:focus {
+        border-color: var(--green-primary);
+      }
+
+      .stklylogin-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 13px;
+        margin-bottom: 24px;
+      }
+
+      .stklylogin-meta a {
+        color: var(--green-primary);
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .stklylogin-btn-submit {
+        position: relative;
+        width: 100%;
+        height: 54px;
+        background-color: var(--navy-dark);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        overflow: hidden;
+        z-index: 1;
+      }
+
+      .stklylogin-btn-submit::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 0;
+        background-color: var(--green-primary);
+        z-index: -1;
+        transition: height 0.4s ease;
+      }
+
+      .stklylogin-btn-submit:hover::before {
+        height: 100%;
+      }
+
+      .stklylogin-divider {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin: 30px 0;
+        color: var(--text-light);
+        font-size: 13px;
+      }
+      .stklylogin-divider::before,
+      .stklylogin-divider::after {
+        content: "";
+        flex: 1;
+        border-bottom: 1px solid var(--border-light);
+      }
+      .stklylogin-divider:not(:empty)::before {
+        margin-right: 15px;
+      }
+      .stklylogin-divider:not(:empty)::after {
+        margin-left: 15px;
+      }
+
+      .stklylogin-social-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      .stklylogin-social-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px;
+        border: 1px solid var(--border-light);
+        border-radius: 4px;
+        background: white;
+        font-size: 14px;
+        cursor: pointer;
+        transition: 0.3s;
+        gap: 10px;
+      }
+      .stklylogin-social-btn:hover {
+        background: var(--green-primary);
+        color: white;
+        border-color: var(--green-primary);
+      }
+
+      @media (max-width: 992px) {
+        .stklylogin-wrapper {
+          flex-direction: column;
+        }
+        .stklylogin-image-panel {
+          width: 100%;
+          min-height: 250px;
+        }
+        .stklylogin-form-panel {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stklylogin-wrapper">
+      <section class="stklylogin-image-panel">
+        <div class="stklylogin-logo">STACKLY</div>
+        <div class="stklylogin-subtitle">Welcome back!</div>
+        <h2 class="stklylogin-heading">
+          Access your dashboard and manage your healthcare journey
+        </h2>
+        <button
+          type="submit"
+          class="stklylogin-btn-submit"
+          onclick="window.location.href = './index.html'"
+        >
+          BACK TO HOME
+        </button>
+      </section>
+
+      <section class="stklylogin-form-panel">
+        <div class="stklylogin-form-container">
+          <div class="stklylogin-header">
+            <h1>Login to your account</h1>
+            <p>
+              Don't have an account?
+              <a
+                href="./signup.html"
+                style="text-decoration: none; color: #19b56f"
+                >Sign Up</a
+              >
+            </p>
+          </div>
+
+          <form id="login-form">
+            <div class="stklylogin-form-group">
+              <label class="stklylogin-label">Login as</label>
+              <select class="stklylogin-select" id="role" required>
+                <option value="Researcher">Researcher</option>
+                <option value="Patient">Patient</option>
+              </select>
+            </div>
+            <div class="stklylogin-form-group">
+              <label class="stklylogin-label">Email Address</label>
+              <input
+                type="email"
+                class="stklylogin-input"
+                id="email"
+                placeholder="Enter Your Email"
+                autocomplete="off"
+                required
+              />
+            </div>
+            <div class="stklylogin-form-group">
+              <label class="stklylogin-label">Password</label>
+              <input
+                type="password"
+                class="stklylogin-input"
+                id="password"
+                placeholder="Enter Password"
+                autocomplete="new-password"
+                required
+              />
+            </div>
+
+            <div class="stklylogin-meta">
+              <label style="display: flex; align-items: center; gap: 8px">
+                <input type="checkbox" /> Remember me
+              </label>
+              <a href="./404.html">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="stklylogin-btn-submit">LOGIN</button>
+
+            <div class="stklylogin-divider">Or create with</div>
+            <div class="stklylogin-social-grid">
+              <button
+                type="button"
+                class="stklylogin-social-btn"
+                onclick="window.location.href = './404.html'"
+              >
+                <i data-lucide="facebook"></i> Facebook
+              </button>
+              <button
+                type="button"
+                class="stklylogin-social-btn"
+                onclick="window.location.href = './404.html'"
+              >
+                <i data-lucide="chrome"></i> Google
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      lucide.createIcons();
+      document.getElementById("login-form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const email = document.getElementById("email").value;
+        const role = document.getElementById("role").value;
+
+        const userData = {
+          name: role === "Researcher" ? "Dr. Jane Smith" : "John Doe",
+          email: email,
+          role: role,
+        };
+
+        localStorage.setItem("user", JSON.stringify(userData));
+
+        if (role === "Researcher") {
+          window.location.href = "researcher-dashboard.html";
+        } else {
+          window.location.href = "patient-dashboard.html";
+        }
+      });
+      window.onload = () => {
+        document.getElementById("login-form").reset();
+      };
+    </script>
+  </body>
+</html>

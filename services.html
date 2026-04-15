@@ -1,0 +1,946 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Services | Biotechnology & Laboratory</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./nav.css" />
+    <link rel="stylesheet" href="./footer.css" />
+    <style>
+      :root {
+        --navy-dark: #062b4a;
+        --navy-deep: #071f3a;
+        --navy-light: #0d3558;
+        --green-primary: #19b56f;
+        --green-hover: #15a362;
+        --green-light: #2ed189;
+        --teal-accent: #17c3b2;
+        --bg-soft: #f5f7f9;
+        --card-bg: #ffffff;
+        --border-light: #e4e9f0;
+        --text-dark: #0a2239;
+        --text-light: #6b7c93;
+        --text-white: #ffffff;
+        --input-bg: #ececec;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: var(--bg-soft);
+        color: var(--text-dark);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* --- HERO BANNER --- */
+      .hero {
+        position: relative;
+        height: 450px;
+        width: 100%;
+        background:
+          linear-gradient(rgba(6, 43, 74, 0.75), rgba(6, 43, 74, 0.75)),
+          url("./assets/servicehero.webp") center/cover no-repeat;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: var(--text-white);
+      }
+
+      .hero h1 {
+        font-size: 52px;
+        font-weight: 700;
+        margin-bottom: 10px;
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      .breadcrumb {
+        font-size: 14px;
+        font-weight: 400;
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      /* Wave Divider */
+      .hero-divider {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        background: #fff;
+        clip-path: ellipse(60% 100% at 50% 100%);
+      }
+
+      .home-btn {
+        position: absolute;
+        bottom: -25px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50px;
+        height: 50px;
+        background: var(--navy-dark);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        z-index: 10;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        text-decoration: none;
+        transition: transform 0.3s ease;
+      }
+
+      .home-btn:hover {
+        transform: translateX(-50%) scale(1.1);
+        background: var(--green-primary);
+      }
+
+      /* --- SERVICES GRID --- */
+      .section-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 100px 20px;
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+      }
+
+      /* Service Card Styling */
+      .service-card {
+        background: var(--card-bg);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        transition: all 0.4s ease;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        opacity: 0;
+        transform: translateY(40px);
+      }
+
+      .card-header {
+        background: var(--navy-dark);
+        height: 140px;
+        padding: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        position: relative;
+        z-index: 2;
+        transition: background 0.4s ease;
+      }
+
+      .card-header h3 {
+        color: var(--text-white);
+        font-size: 26px;
+        font-weight: 600;
+        line-height: 1.2;
+        max-width: 70%;
+        position: relative;
+      }
+
+      /* Underline Animation */
+      .card-header h3::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #fff;
+        transition: width 0.4s ease;
+      }
+
+      .card-header .faded-icon {
+        font-size: 60px;
+        color: #fff;
+        opacity: 0.15;
+        transform: translateY(-10px);
+      }
+
+      /* Diagonal Shapes */
+      .diagonal-divider {
+        position: relative;
+        height: 80px;
+        margin-top: -1px; /* prevent tiny gap */
+        z-index: 2;
+      }
+
+      .shape-layer-1 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--navy-dark);
+        clip-path: polygon(0 0, 100% 0, 100% 30%, 0 100%);
+        transition: background 0.4s ease;
+      }
+
+      .shape-layer-2 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 85%;
+        background: var(--navy-light);
+        clip-path: polygon(0 0, 100% 0, 100% 0%, 0 100%);
+        transition: background 0.4s ease;
+        opacity: 0.6;
+      }
+
+      .card-image-wrapper {
+        width: 100%;
+        height: 260px;
+        overflow: hidden;
+        z-index: 1;
+      }
+
+      .card-image-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+      }
+
+      /* Hover States */
+      .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+      }
+
+      .service-card:hover .card-header {
+        background: var(--green-primary);
+      }
+
+      .service-card:hover .shape-layer-1 {
+        background: var(--green-primary);
+      }
+
+      .service-card:hover .shape-layer-2 {
+        background: var(--green-light);
+      }
+
+      .service-card:hover .card-header h3::after {
+        width: 60px;
+      }
+
+      .service-card:hover .card-image-wrapper img {
+        transform: scale(1.1);
+      }
+
+      /* --- PRICING SECTION --- */
+      .pricing-section {
+        background: #fff;
+        padding: 100px 20px;
+        text-align: center;
+      }
+
+      .section-title {
+        margin-bottom: 60px;
+      }
+
+      .section-title h2 {
+        font-size: 36px;
+        color: var(--navy-dark);
+        margin-bottom: 10px;
+      }
+
+      .section-title p {
+        color: var(--text-light);
+        font-size: 16px;
+      }
+
+      .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .pricing-card {
+        background: #fff;
+        padding: 50px 40px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        transition: all 0.4s ease;
+        border: 1px solid var(--border-light);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      .pricing-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      }
+
+      .plan-name {
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--navy-dark);
+        margin-bottom: 20px;
+      }
+
+      .plan-price {
+        font-size: 42px;
+        font-weight: 700;
+        color: var(--green-primary);
+        margin-bottom: 30px;
+      }
+
+      .plan-price span {
+        font-size: 16px;
+        color: var(--text-light);
+        font-weight: 400;
+      }
+
+      .feature-list {
+        list-style: none;
+        width: 100%;
+        margin-bottom: 40px;
+        text-align: left;
+      }
+
+      .feature-list li {
+        padding: 10px 0;
+        border-bottom: 1px solid var(--border-light);
+        color: var(--text-light);
+        font-size: 15px;
+        display: flex;
+        align-items: center;
+      }
+
+      .feature-list li i {
+        color: var(--green-primary);
+        margin-right: 12px;
+        font-size: 14px;
+      }
+
+      /* Pricing Button with Pseudo-element Fill */
+      .pricing-btn {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        padding: 15px 0;
+        background: var(--green-primary);
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: 600;
+        overflow: hidden;
+        z-index: 1;
+        transition: color 0.4s ease;
+      }
+
+      .pricing-btn::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 0;
+        background: var(--navy-dark);
+        z-index: -1;
+        transition: height 0.4s ease;
+      }
+
+      .pricing-btn:hover::before {
+        height: 100%;
+      }
+
+      /* --- RESPONSIVE --- */
+      @media (max-width: 1024px) {
+        .services-grid,
+        .pricing-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .hero h1 {
+          font-size: 42px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .services-grid,
+        .pricing-grid {
+          grid-template-columns: 1fr;
+          gap: 25px;
+        }
+        .hero {
+          height: 350px;
+        }
+        .hero h1 {
+          font-size: 32px;
+        }
+        .section-container {
+          padding: 60px 20px;
+        }
+        .card-header h3 {
+          font-size: 22px;
+        }
+      }
+
+      /* Animation Classes */
+      .reveal-active {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+      }
+    </style>
+  </head>
+  <body>
+    <header id="stklynav-header">
+      <div class="stklynav-logo">
+        <a href="./index.html"
+          ><img
+            src="./assets/logo.webp"
+            alt="Stkly Logo"
+            class="stklynav-logo-img"
+        /></a>
+      </div>
+
+      <div class="stklynav-topbar">
+        <div class="stklynav-marquee-container">
+          <span class="stklynav-marquee-text"
+            >Advancing biotechnology for healthier futures. &nbsp;&nbsp;&nbsp;
+            Innovative solutions for a changing world. &nbsp;&nbsp;&nbsp;
+            Leading the way in genetic research.</span
+          >
+        </div>
+        <div class="stklynav-socials">
+          <a href="./404.html" class="stklynav-social-icon"
+            ><svg viewBox="0 0 24 24">
+              <path
+                d="M18.77,7.46H14.5v-1.9c0-.9.6-1.1,1-1.1h3V.5h-4.33c-4.8,0-5.87,3.6-5.87,5.87V7.46H5.47v3.83h2.83v12.21h5.05v-12.21h3.42l.52-3.83Z"
+              /></svg
+          ></a>
+          <a href="./404.html" class="stklynav-social-icon"
+            ><svg viewBox="0 0 24 24">
+              <path
+                d="M23.95,4.57c-.88.39-1.83.65-2.83.77,1.02-.61,1.79-1.58,2.16-2.72-.95.56-2.01.97-3.13,1.19-.9-.96-2.17-1.56-3.59-1.56-2.72,0-4.92,2.2-4.92,4.92,0,.39.04.76.13,1.12C7.69,8.09,4.07,6.13,1.64,3.16c-.42.73-.67,1.58-.67,2.48,0,1.71.87,3.22,2.19,4.1-.81-.03-1.56-.25-2.23-.61v.06c0,2.39,1.7,4.38,3.95,4.83-.41.11-.85.17-1.3.17-.32,0-.63-.03-.93-.09.63,1.96,2.45,3.39,4.6,3.43-1.68,1.32-3.8,2.1-6.1,2.1-.4,0-.79-.02-1.18-.07,2.18,1.39,4.76,2.21,7.55,2.21,9.05,0,14-7.5,14-14,0-.21,0-.42-.01-.63,1-.72,1.85-1.61,2.53-2.62Z"
+              /></svg
+          ></a>
+          <a href="./404.html" class="stklynav-social-icon"
+            ><svg viewBox="0 0 24 24">
+              <path
+                d="M22.23,0H1.77C.79,0,0,.77,0,1.72v20.56c0,.95.79,1.72,1.77,1.72h20.45c.98,0,1.77-.77,1.77-1.72V1.72c0-.95-.79-1.72-1.77-1.72ZM7.12,20.45h-3.56V9h3.56v11.45ZM5.34,7.43c-1.14,0-2.06-.92-2.06-2.06s.92-2.06,2.06-2.06,2.06.92,2.06,2.06-.92,2.06-2.06,2.06ZM20.45,20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85,0-2.14,1.45-2.14,2.95v5.67h-3.56V9h3.42v1.56h.05c.48-.9,1.64-1.85,3.37-1.85,3.61,0,4.27,2.37,4.27,5.46v6.28Z"
+              /></svg
+          ></a>
+          <a href="./404.html" class="stklynav-social-icon"
+            ><svg viewBox="0 0 24 24">
+              <path
+                d="M12,2.16c3.2,0,3.58.01,4.85.07,1.17.05,1.81.25,2.23.41.56.22.96.48,1.38.9.42.42.68.82.9,1.38.16.42.36,1.06.41,2.23.06,1.27.07,1.65.07,4.85s-.01,3.58-.07,4.85c-.05,1.17-.25,1.81-.41,2.23-.22.56-.48.96-.9,1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.81-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.81.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68,1.38-.9.42-.16,1.06-.36,2.23-.41,1.27-.06,1.65-.07,4.85-.07m0-2.16C8.74,0,8.33.01,7.05.07c-1.28.06-2.15.26-2.91.56-.79.31-1.45.71-2.11,1.38-.66.66-1.07,1.33-1.38,2.11-.29.76-.5,1.63-.56,2.91C.01,8.33,0,8.74,0,12s.01,3.67.07,4.95c.06,1.28.26,2.15.56,2.91.31.79.71,1.45,1.38,2.11.66.66,1.33,1.07,2.11,1.38.76.29,1.63.5,2.91.56,1.28.06,1.68.07,4.95.07s3.67-.01,4.95-.07c1.28-.06,2.15-.26,2.91-.56.79-.31,1.45-.71,2.11-1.38.66-.66,1.07-1.33,1.38-2.11.29-.76.5-1.63.56-2.91.06-1.28.07-1.68.07-4.95s-.01-3.67-.07-4.95c-.06-1.28-.26-2.15-.56-2.91-.31-.79-.71-1.45-1.38-2.11-.66-.66-1.33-1.07-2.11-1.38-.76-.29-1.63-.5-2.91-.56-1.28-.06-1.68-.07-4.95-.07Z"
+              />
+              <path
+                d="M12,5.84c-3.4,0-6.16,2.76-6.16,6.16s2.76,6.16,6.16,6.16,6.16-2.76,6.16-6.16-2.76-6.16-6.16-6.16m0,10.16c-2.21,0-4-1.79-4-4s1.79-4,4-4,4,1.79,4,4-1.79,4-4,4Z"
+              />
+              <circle cx="18.41" cy="5.59" r="1.44" /></svg
+          ></a>
+        </div>
+      </div>
+
+      <div class="stklynav-main">
+        <nav class="stklynav-menu">
+          <a href="./index.html" class="stklynav-item"
+            ><svg viewBox="0 0 24 24">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline></svg
+            ><span>HOME</span></a
+          >
+          <a href="./services.html" class="stklynav-item"
+            ><svg viewBox="0 0 24 24">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline></svg
+            ><span>SERVICES</span></a
+          >
+          <a href="./blog.html" class="stklynav-item"
+            ><svg viewBox="0 0 24 24">
+              <path
+                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+              ></path>
+              <polyline points="22,6 12,13 2,6"></polyline></svg
+            ><span>BLOG</span></a
+          >
+          <a href="./contact.html" class="stklynav-item"
+            ><svg viewBox="0 0 24 24">
+              <path
+                d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+              ></path></svg
+            ><span>CONTACT</span></a
+          >
+        </nav>
+
+        <div class="stklynav-actions">
+          <a href="./login.html" class="stklynav-btn stklynav-btn-login"
+            >LOGIN</a
+          >
+          <a href="./signup.html" class="stklynav-btn stklynav-btn-start"
+            >GET STARTED</a
+          >
+        </div>
+
+        <button class="stklynav-hamburger" id="stklynav-hamburger-btn">
+          <svg
+            width="28"
+            height="28"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- MOBILE OVERLAY REDESIGNED -->
+    <div class="stklynav-mobile" id="stklynav-mobile-overlay">
+      <div class="stklynav-mobile-header">
+        <a href="./index.html">
+          <img src="./assets/logo.webp" alt="Logo" class="stklynav-mobile-logo"
+        /></a>
+        <button class="stklynav-close" id="stklynav-close-btn">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <nav class="stklynav-mobile-menu">
+        <a href="./index.html" class="stklynav-mobile-item">
+          <svg viewBox="0 0 24 24">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+          HOME
+        </a>
+        <a href="./services.html" class="stklynav-mobile-item">
+          <svg viewBox="0 0 24 24">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+          SERVICES
+        </a>
+        <a href="./blog.html" class="stklynav-mobile-item">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+            ></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+          BLOG
+        </a>
+        <a href="./contact.html" class="stklynav-mobile-item">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+            ></path>
+          </svg>
+          CONTACT
+        </a>
+      </nav>
+
+      <div class="stklynav-mobile-footer">
+        <a href="./login.html" class="stklynav-btn stklynav-btn-login">LOGIN</a>
+        <a href="./signup.html" class="stklynav-btn stklynav-btn-start"
+          >GET STARTED</a
+        >
+      </div>
+    </div>
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1 id="hero-title">Our Services</h1>
+      <div class="breadcrumb" id="hero-bread">Home > Services</div>
+      <div class="hero-divider"></div>
+      <a href="./index.html" class="home-btn"><i class="fas fa-home"></i></a>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section-container">
+      <div
+        class="services-grid"
+        id="servicesGrid"
+        onclick="window.location.href = './404.html'"
+      >
+        <!-- Card 1 -->
+        <div class="service-card reveal">
+          <div class="card-header">
+            <h3>Chemical Research</h3>
+            <i class="fas fa-flask faded-icon"></i>
+          </div>
+          <div class="diagonal-divider">
+            <div class="shape-layer-1"></div>
+            <div class="shape-layer-2"></div>
+          </div>
+          <div class="card-image-wrapper">
+            <img src="./assets/s1.webp" alt="Chemical Research" />
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div
+          class="service-card reveal"
+          onclick="window.location.href = './404.html'"
+        >
+          <div class="card-header">
+            <h3>Free home sampling</h3>
+            <i class="fas fa-vials faded-icon"></i>
+          </div>
+          <div class="diagonal-divider">
+            <div class="shape-layer-1"></div>
+            <div class="shape-layer-2"></div>
+          </div>
+          <div class="card-image-wrapper">
+            <img src="./assets/s2.webp" alt="Home Sampling" />
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div
+          class="service-card reveal"
+          onclick="window.location.href = './404.html'"
+        >
+          <div class="card-header">
+            <h3>Safe Diagnoses</h3>
+            <i class="fas fa-microscope faded-icon"></i>
+          </div>
+          <div class="diagonal-divider">
+            <div class="shape-layer-1"></div>
+            <div class="shape-layer-2"></div>
+          </div>
+          <div class="card-image-wrapper">
+            <img src="./assets/s3.webp" alt="Diagnoses" />
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div
+          class="service-card reveal"
+          onclick="window.location.href = './404.html'"
+        >
+          <div class="card-header">
+            <h3>Artificial intelligence</h3>
+            <i class="fas fa-atom faded-icon"></i>
+          </div>
+          <div class="diagonal-divider">
+            <div class="shape-layer-1"></div>
+            <div class="shape-layer-2"></div>
+          </div>
+          <div class="card-image-wrapper">
+            <img src="./assets/s4.webp" alt="AI" />
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div
+          class="service-card reveal"
+          onclick="window.location.href = './404.html'"
+        >
+          <div class="card-header">
+            <h3>Specialized genetic tests</h3>
+            <i class="fas fa-dna faded-icon"></i>
+          </div>
+          <div class="diagonal-divider">
+            <div class="shape-layer-1"></div>
+            <div class="shape-layer-2"></div>
+          </div>
+          <div class="card-image-wrapper">
+            <img src="./assets/s5.webp" alt="Genetic Tests" />
+          </div>
+        </div>
+
+        <!-- Card 6 -->
+        <div
+          class="service-card reveal"
+          onclick="window.location.href = './404.html'"
+        >
+          <div class="card-header">
+            <h3>Pathology testing</h3>
+            <i class="fas fa-bacteria faded-icon"></i>
+          </div>
+          <div class="diagonal-divider">
+            <div class="shape-layer-1"></div>
+            <div class="shape-layer-2"></div>
+          </div>
+          <div class="card-image-wrapper">
+            <img src="./assets/s6.webp" alt="Pathology" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section">
+      <div class="section-title">
+        <h2>Pricing Plans</h2>
+        <p>Choose the best plan for your testing needs.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Plan 1 -->
+        <div class="pricing-card reveal">
+          <div class="plan-name">Basic</div>
+          <div class="plan-price">$29<span>/month</span></div>
+          <ul class="feature-list">
+            <li><i class="fas fa-check"></i> Laboratory testing</li>
+            <li><i class="fas fa-check"></i> Free home sampling</li>
+            <li><i class="fas fa-check"></i> Online reports</li>
+            <li><i class="fas fa-check"></i> Medical consultation</li>
+            <li><i class="fas fa-check"></i> 24/7 support</li>
+          </ul>
+          <a href="./404.html" class="pricing-btn">Get Started</a>
+        </div>
+
+        <!-- Plan 2 -->
+        <div class="pricing-card reveal">
+          <div class="plan-name">Professional</div>
+          <div class="plan-price">$59<span>/month</span></div>
+          <ul class="feature-list">
+            <li><i class="fas fa-check"></i> Laboratory testing</li>
+            <li><i class="fas fa-check"></i> Free home sampling</li>
+            <li><i class="fas fa-check"></i> Online reports</li>
+            <li><i class="fas fa-check"></i> Medical consultation</li>
+            <li><i class="fas fa-check"></i> 24/7 support</li>
+          </ul>
+          <a href="./404.html" class="pricing-btn">Get Started</a>
+        </div>
+
+        <!-- Plan 3 -->
+        <div class="pricing-card reveal">
+          <div class="plan-name">Enterprise</div>
+          <div class="plan-price">$99<span>/month</span></div>
+          <ul class="feature-list">
+            <li><i class="fas fa-check"></i> Laboratory testing</li>
+            <li><i class="fas fa-check"></i> Free home sampling</li>
+            <li><i class="fas fa-check"></i> Online reports</li>
+            <li><i class="fas fa-check"></i> Medical consultation</li>
+            <li><i class="fas fa-check"></i> 24/7 support</li>
+          </ul>
+          <a href="./404.html" class="pricing-btn">Get Started</a>
+        </div>
+      </div>
+    </section>
+    <footer class="stklyfoot-footer">
+      <div class="stklyfoot-container">
+        <div class="stklyfoot-newsletter" id="stklyfoot-newsletter">
+          <h3>Subscribe to our Newsletter</h3>
+          <form class="stklyfoot-form" action="./404.html">
+            <input
+              type="email"
+              class="stklyfoot-email"
+              placeholder="Enter your email"
+              required
+            />
+            <button class="stklyfoot-subscribe">Subscribe Now</button>
+          </form>
+        </div>
+
+        <div class="stklyfoot-grid">
+          <div class="stklyfoot-column stklyfoot-about">
+            <a href="./index.html">
+              <img src="./assets/logo.webp" alt="Logo" class="stklyfoot-logo"
+            /></a>
+            <p class="stklyfoot-description">
+              Leading the future of genetic research and molecular diagnostics
+              through innovative biotechnology solutions and sustainable
+              clinical practices.
+            </p>
+          </div>
+
+          <div class="stklyfoot-column stklyfoot-links">
+            <h4 class="stklyfoot-heading">Quick Links</h4>
+            <div class="stklyfoot-chips">
+              <a href="./index.html" class="stklyfoot-chip">HOME</a>
+              <a href="./blog.html" class="stklyfoot-chip">BLOG</a>
+              <a href="./contact.html" class="stklyfoot-chip">CONTACT</a>
+              <a href="./services.html" class="stklyfoot-chip">SERVICES</a>
+            </div>
+          </div>
+
+          <div class="stklyfoot-column stklyfoot-contact">
+            <h4 class="stklyfoot-heading">Contact Details</h4>
+
+            <div class="stklyfoot-contact-item">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+                />
+              </svg>
+              <span>2972 Westheimer Rd. Santa Ana, Illinois 85486</span>
+            </div>
+
+            <div class="stklyfoot-contact-item">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+                />
+              </svg>
+              <span>support@company.com</span>
+            </div>
+
+            <div class="stklyfoot-contact-item">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
+                />
+              </svg>
+              <span>+23 (000)-9850</span>
+            </div>
+
+            <div class="stklyfoot-socials">
+              <!-- Facebook -->
+              <a href="./404.html" class="stklyfoot-social-icon">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1V12h3l-.5 3h-2.5v6.8c4.56-.93 8-4.96 8-9.8z"
+                  />
+                </svg>
+              </a>
+              <!-- Twitter (X) -->
+              <a href="./404.html" class="stklyfoot-social-icon">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+                  />
+                </svg>
+              </a>
+              <!-- LinkedIn -->
+              <a href="./404.html" class="stklyfoot-social-icon">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-2.25 15.5h-2.5V11c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v7.5H8.75V9h2.5v1.25c.5-.75 1.5-1.25 2.5-1.25 1.93 0 3.5 1.57 3.5 3.5v5.5zM7.5 7.5h-2v-2h2v2z"
+                  />
+                </svg>
+              </a>
+              <!-- Instagram -->
+              <a href="./404.html" class="stklyfoot-social-icon">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8A3.6 3.6 0 0 0 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6A3.6 3.6 0 0 0 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="stklyfoot-column stklyfoot-research">
+            <h4 class="stklyfoot-heading">Research</h4>
+            <ul class="stklyfoot-research-list">
+              <li class="stklyfoot-research-item">
+                <a href="./404.html" class="stklyfoot-research-link"
+                  >Publications</a
+                >
+              </li>
+              <li class="stklyfoot-research-item">
+                <a href="./404.html" class="stklyfoot-research-link"
+                  >Case Studies</a
+                >
+              </li>
+              <li class="stklyfoot-research-item">
+                <a href="./404.html" class="stklyfoot-research-link"
+                  >Clinical Trials</a
+                >
+              </li>
+              <li class="stklyfoot-research-item">
+                <a href="./404.html" class="stklyfoot-research-link"
+                  >Partnerships</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="stklyfoot-divider"></div>
+        <p class="stklyfoot-copyright">
+          &copy; 2024 Biotech Research Corp. All rights reserved.
+        </p>
+      </div>
+    </footer>
+    <script src="./nav.js"></script>
+    <script src="./footer.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Hero Animation
+        const heroTitle = document.getElementById("hero-title");
+        const heroBread = document.getElementById("hero-bread");
+
+        setTimeout(() => {
+          heroTitle.style.transition = "all 0.8s ease-out";
+          heroTitle.classList.add("reveal-active");
+
+          setTimeout(() => {
+            heroBread.style.transition = "all 0.8s ease-out";
+            heroBread.classList.add("reveal-active");
+          }, 200);
+        }, 100);
+
+        // Scroll Reveal Observer
+        const observerOptions = {
+          threshold: 0.15,
+          rootMargin: "0px 0px -50px 0px",
+        };
+
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+              // Add a slight stagger effect based on index in current view if needed
+              // But for simple implementation we just reveal
+              setTimeout(() => {
+                entry.target.classList.add("reveal-active");
+              }, 50);
+              observer.unobserve(entry.target);
+            }
+          });
+        }, observerOptions);
+
+        const revealElements = document.querySelectorAll(".reveal");
+        revealElements.forEach((el) => revealObserver.observe(el));
+      });
+    </script>
+  </body>
+</html>

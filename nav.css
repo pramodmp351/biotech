@@ -1,0 +1,365 @@
+:root {
+  --navy-dark: #062b4a;
+  --navy-deep: #071f3a;
+  --navy-light: #0d3558;
+  --green-primary: #19b56f;
+  --green-hover: #15a362;
+  --green-light: #2ed189;
+  --teal-accent: #17c3b2;
+  --bg-soft: #f5f7f9;
+  --border-light: #e4e9f0;
+  --text-dark: #0a2239;
+  --text-light: #6b7c93;
+  --text-white: #ffffff;
+
+  --stklynav-transition: 0.4s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: var(--bg-soft);
+  min-height: 200vh;
+}
+
+/* HEADER WRAPPER */
+#stklynav-header {
+  width: 100%;
+  background: white;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  transition: box-shadow var(--stklynav-transition);
+}
+
+#stklynav-header.stklynav-scrolled {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* LOGO AREA */
+.stklynav-logo {
+  display: flex;
+  align-items: center;
+  padding-left: 30px;
+  background: white;
+  border-right: 1px solid var(--border-light);
+  grid-row: span 2;
+}
+
+.stklynav-logo-img {
+  height: 80px;
+  display: block;
+}
+
+/* TOP BAR */
+.stklynav-topbar {
+  height: 40px;
+  background: var(--navy-dark);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  overflow: hidden;
+}
+
+.stklynav-marquee-container {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-right: 40px;
+}
+
+.stklynav-marquee-text {
+  display: inline-block;
+  color: var(--text-white);
+  font-size: 14px;
+  padding-left: 100%;
+  animation: stklynav-marquee 25s linear infinite;
+}
+
+@keyframes stklynav-marquee {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-100%, 0);
+  }
+}
+
+.stklynav-socials {
+  display: flex;
+  gap: 12px;
+}
+
+.stklynav-social-icon {
+  width: 30px;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-decoration: none;
+  transition: background var(--stklynav-transition);
+}
+
+.stklynav-social-icon:hover {
+  background: var(--green-primary);
+}
+
+.stklynav-social-icon svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+/* MAIN NAVIGATION BAR */
+.stklynav-main {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  border-top: 1px solid var(--border-light);
+}
+
+.stklynav-menu {
+  display: flex;
+  gap: 35px;
+}
+
+.stklynav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--text-dark);
+  font-size: 15px;
+  font-weight: 500;
+  transition: color var(--stklynav-transition);
+}
+
+.stklynav-item:hover {
+  color: var(--green-primary);
+}
+
+.stklynav-item svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+}
+
+/* ACTION BUTTONS */
+.stklynav-actions {
+  display: flex;
+  gap: 15px;
+}
+
+.stklynav-btn {
+  position: relative;
+  padding: 12px 26px;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 4px;
+  text-decoration: none;
+  overflow: hidden;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--stklynav-transition);
+}
+
+.stklynav-btn::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  z-index: -1;
+  transition: height var(--stklynav-transition);
+}
+
+.stklynav-btn:hover::before {
+  height: 100%;
+}
+
+.stklynav-btn-login {
+  border: 2px solid var(--green-primary);
+  color: var(--green-primary);
+  background: transparent;
+}
+
+.stklynav-btn-login::before {
+  background: var(--green-primary);
+}
+
+.stklynav-btn-login:hover {
+  color: white;
+}
+
+.stklynav-btn-start {
+  background: var(--green-primary);
+  color: white;
+  border: 2px solid var(--green-primary);
+}
+
+.stklynav-btn-start::before {
+  background: var(--navy-dark);
+}
+
+/* HAMBURGER */
+.stklynav-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-dark);
+}
+
+/* MOBILE MENU OVERLAY - REDESIGNED */
+.stklynav-mobile {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 100%;
+  height: 100vh;
+  background: var(--navy-deep);
+  z-index: 2000;
+  transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.stklynav-mobile.active {
+  right: 0;
+}
+
+.stklynav-mobile-header {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 25px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.stklynav-mobile-logo {
+  height: 45px;
+  filter: brightness(0) invert(1);
+}
+
+.stklynav-close {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.stklynav-mobile-menu {
+  display: flex;
+  flex-direction: column;
+  padding: 30px 25px;
+  gap: 10px;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.stklynav-mobile-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: white;
+  font-size: 18px;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: color 0.3s ease;
+}
+
+.stklynav-mobile-item:hover {
+  color: var(--green-primary);
+}
+
+.stklynav-mobile-item svg {
+  width: 22px;
+  height: 22px;
+  stroke: var(--green-primary);
+  fill: none;
+  stroke-width: 2;
+}
+
+.stklynav-mobile-footer {
+  padding: 25px;
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.stklynav-mobile-footer .stklynav-btn {
+  width: 100%;
+  padding: 16px;
+}
+
+/* RESPONSIVE BREAKPOINTS */
+@media (max-width: 1024px) {
+  #stklynav-header {
+    grid-template-columns: 180px 1fr;
+  }
+  .stklynav-menu {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  #stklynav-header {
+    grid-template-columns: 1fr 60px;
+    height: 70px;
+  }
+
+  .stklynav-logo {
+    grid-row: 1;
+    border-right: none;
+    padding-left: 20px;
+  }
+
+  .stklynav-topbar {
+    display: none;
+  }
+
+  .stklynav-main {
+    border-top: none;
+    height: 70px;
+    padding: 0 20px;
+  }
+
+  .stklynav-menu,
+  .stklynav-actions {
+    display: none;
+  }
+
+  .stklynav-hamburger {
+    display: block;
+  }
+}

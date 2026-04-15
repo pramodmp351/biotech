@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 - Page Not Found</title>
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --navy-dark: #062b4a;
+        --navy-deep: #071f3a;
+        --navy-light: #0d3558;
+        --green-primary: #19b56f;
+        --green-hover: #15a362;
+        --green-light: #2ed189;
+        --teal-accent: #17c3b2;
+        --bg-soft: #f5f7f9;
+        --card-bg: #ffffff;
+        --border-light: #e4e9f0;
+        --text-dark: #0a2239;
+        --text-light: #6b7c93;
+        --text-white: #ffffff;
+        --input-bg: #ececec;
+      }
+
+      /* Basic Resets */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: var(--bg-soft);
+        color: var(--text-dark);
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        line-height: 1.6;
+      }
+
+      /* Layout Container */
+      .container {
+        max-width: 600px;
+        width: 90%;
+        text-align: center;
+        padding: 2rem;
+        z-index: 1;
+      }
+
+      /* Typography */
+      .error-code {
+        font-size: 90px;
+        font-weight: 700;
+        color: var(--navy-dark);
+        line-height: 1;
+        margin-bottom: 25px;
+      }
+
+      h1 {
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 25px;
+      }
+
+      p {
+        font-size: 16px;
+        color: var(--text-light);
+        margin-bottom: 25px;
+      }
+
+      /* Search Section */
+      .search-wrapper {
+        width: 100%;
+        margin-bottom: 25px;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        padding: 14px 20px;
+        background-color: var(--input-bg);
+        border: 2px solid transparent;
+        border-radius: 4px;
+        font-family: "Poppins", sans-serif;
+        font-size: 1rem;
+        color: var(--text-dark);
+        outline: none;
+        transition:
+          border-color 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      input[type="text"]:focus {
+        border-color: var(--green-primary);
+        box-shadow: 0 0 8px rgba(25, 181, 111, 0.2);
+      }
+
+      /* Animated Button with Slant and Fill Effect */
+      .btn-home {
+        position: relative;
+        display: inline-block;
+        background-color: var(--navy-dark); /* Base color before fill */
+        color: var(--text-white);
+        padding: 14px 32px;
+        text-decoration: none;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        overflow: hidden;
+        z-index: 1;
+        /* Slant effect on top-right corner */
+        clip-path: polygon(0 0, 85% 0, 100% 15%, 100% 100%, 0 100%);
+        transition:
+          clip-path 0.4s ease,
+          transform 0.3s ease,
+          opacity 0.8s ease-out;
+      }
+
+      /* The Fill from Bottom Layer */
+      .btn-home::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--green-primary);
+        z-index: -1;
+        transform: scaleY(0);
+        transform-origin: bottom;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .btn-home:hover {
+        /* Becomes rectangular on hover */
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%, 0 100%);
+        transform: translateY(-3px);
+        color: var(--text-white);
+      }
+
+      .btn-home:hover::before {
+        transform: scaleY(1);
+      }
+
+      /* Animation Classes */
+      .reveal {
+        opacity: 0;
+        transition:
+          opacity 0.8s ease-out,
+          transform 0.8s ease-out;
+        will-change: opacity, transform;
+      }
+
+      .slide-up {
+        transform: translateY(30px);
+      }
+
+      /* State when animation triggers */
+      .reveal.active {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+      }
+
+      /* Desktop Adjustments */
+      @media (min-width: 768px) {
+        .error-code {
+          font-size: 140px;
+        }
+        h1 {
+          font-size: 34px;
+        }
+        .container {
+          padding: 0;
+        }
+      }
+
+      /* Accessibility: No-JS fallback */
+      @media (prefers-reduced-motion: reduce) {
+        .reveal {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <!-- Error Content -->
+      <div class="error-code reveal slide-up">404</div>
+
+      <h1 class="reveal">Oops! Page not found</h1>
+
+      <p class="reveal">
+        The page you are looking for might have been removed or does not exist.
+      </p>
+
+      <!-- Search box -->
+      <div class="search-wrapper reveal slide-up">
+        <input type="text" placeholder="Search here" aria-label="Search site" />
+      </div>
+
+      <!-- Action Button -->
+      <a href="./index.html" class="btn-home reveal">Back to Home</a>
+    </main>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const revealElements = document.querySelectorAll(".reveal");
+
+        const observerOptions = {
+          root: null,
+          threshold: 0.1,
+          rootMargin: "0px",
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("active");
+              observer.unobserve(entry.target);
+            }
+          });
+        }, observerOptions);
+
+        revealElements.forEach((el, index) => {
+          el.style.transitionDelay = `${index * 0.15}s`;
+          observer.observe(el);
+        });
+
+        // Fallback trigger
+        setTimeout(() => {
+          revealElements.forEach((el) => {
+            if (!el.classList.contains("active")) {
+              el.classList.add("active");
+            }
+          });
+        }, 500);
+      });
+    </script>
+  </body>
+</html>
